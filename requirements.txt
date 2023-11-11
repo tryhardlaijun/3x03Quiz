@@ -1,0 +1,5 @@
+Flask==2.3.3
+Flask-WTF==1.2.1
+coverage==7.3.2
+selenium==4.15.2
+chromedriver-autoinstaller==0.6.2
