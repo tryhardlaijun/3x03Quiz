@@ -18,10 +18,13 @@ pipeline {
             dependencyCheck additionalArguments: ''' 
                     -o './'
                     -s './'
-                    -f 'ALL' 
+                    -f 'ALL'
+                    --format 'HTML'
+                    --format 'XML'
+                    --suppression 'suppression.xml'
                     --prettyPrint''', odcInstallation: 'Default'
+            dependencyCheckPublisher pattern: 'dependency-check-report.xml'
         
-        dependencyCheckPublisher pattern: 'dependency-check-report.xml'
                 }
         }
 
