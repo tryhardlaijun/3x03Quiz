@@ -16,6 +16,7 @@ pipeline {
             agent any
             steps {
             dependencyCheck additionalArguments: ''' 
+                    --enableExperimental
                     -o './'
                     -s './'
                     -f 'ALL'
