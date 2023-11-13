@@ -72,15 +72,9 @@ pipeline {
             steps {
                 script {
                     recordIssues enabledForFailure: true, tool: sonarQube()
+                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
                 }
             }
-        }
-    }
-    post {
-        success {
-            // Post-actions that don't require an agent
-            // If dependencyCheckPublisher requires an agent, move it to a regular stage
-            dependencyCheckPublisher pattern: 'dependency-check-report.xml'
         }
     }
 }
