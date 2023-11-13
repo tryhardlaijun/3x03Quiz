@@ -18,7 +18,11 @@ pipeline {
                 dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default' 
                 } 
         }
-
+        post {
+            success {
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
 
         stage('Unit Test') {
             agent {
@@ -76,15 +80,12 @@ pipeline {
                 }
             }
         }
-    }   
     post {
         success {
-            // For post actions that require a node, wrap them in a node block
-            node {
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-            }
+            // Post-actions that don't require an agent
+            // If dependencyCheckPublisher requires an agent, move it to a regular stage
+            dependencyCheckPublisher pattern: 'dependency-check-report.xml'
         }
     }
 }
-
 
