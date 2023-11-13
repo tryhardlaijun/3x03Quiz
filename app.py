@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from flask_wtf.csrf import CSRFProtect
-import pymysql
 import re
 
 app = Flask(__name__)
