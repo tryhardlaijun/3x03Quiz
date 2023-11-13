@@ -12,20 +12,23 @@ pipeline {
             }
         }
 
-		stage('OWASP DependencyCheck') {
-            agent any
-            steps {
+    stage('OWASP DependencyCheck') {
+        agent any
+        steps {
             dependencyCheck additionalArguments: ''' 
-                    --enableExperimental
-                    -o './'
-                    -s './'
-                    -f 'XML'
-                    ''', odcInstallation: 'Default'
-            dependencyCheckPublisher pattern: 'dependency-check-report-*.xml'
-        
-                }
-        }
+                --enableExperimental
+                -o './'
+                -s './'
+                -f 'XML'
+                ''', odcInstallation: 'Default'
+            
+            // Add a step to list files in the current directory
+            sh 'ls -l'
 
+            // Look for the Dependency-Check report
+            dependencyCheckPublisher pattern: 'dependency-check-report-*.xml'
+        }
+    }
         stage('Unit Test') {
             agent {
                 docker {
