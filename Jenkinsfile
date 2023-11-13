@@ -76,6 +76,14 @@ pipeline {
                 }
             }
         }
+    }   
+    post {
+        success {
+            // For post actions that require a node, wrap them in a node block
+            node {
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
     }
 }
 
