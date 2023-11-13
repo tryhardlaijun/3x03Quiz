@@ -18,11 +18,6 @@ pipeline {
                 dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default' 
                 } 
         }
-        post {
-            success {
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-            }
-        }
 
         stage('Unit Test') {
             agent {
