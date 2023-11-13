@@ -20,7 +20,7 @@ pipeline {
                     -o './'
                     -s './'
                     -f 'XML'
-                    --prettyPrint''', odcInstallation: 'Default'
+                    ''', odcInstallation: 'Default'
             dependencyCheckPublisher pattern: 'dependency-check-report-*.xml'
         
                 }
