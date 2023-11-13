@@ -80,6 +80,7 @@ pipeline {
                 }
             }
         }
+    }
     post {
         success {
             // Post-actions that don't require an agent
@@ -88,4 +89,4 @@ pipeline {
         }
     }
 }
-}
+
