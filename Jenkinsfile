@@ -15,8 +15,14 @@ pipeline {
 		stage('OWASP DependencyCheck') {
             agent any
             steps {
-                dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default' 
-                } 
+            dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'Default'
+        
+        dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                }
         }
 
         stage('Unit Test') {
@@ -48,7 +54,6 @@ pipeline {
                         }
                     }
                     steps {
-                        sh 'ls && cd /tests && ls'
                         sh 'python selenium_test.py' // Run the Selenium tests
                     }
                 }
