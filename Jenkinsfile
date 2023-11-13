@@ -19,7 +19,7 @@ pipeline {
                     --enableExperimental
                     -o './'
                     -s './'
-                    -f 'ALL'
+                    -f 'XML'
                     --prettyPrint''', odcInstallation: 'Default'
             dependencyCheckPublisher pattern: 'dependency-check-report-*.xml'
         
