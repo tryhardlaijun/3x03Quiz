@@ -13,7 +13,11 @@ pipeline {
         }
 
 		stage('OWASP DependencyCheck') {
-            agent any
+            agent {
+                docker {
+                    image 'my-python-app' // This specifies to use the image built in the previous stage.
+                }
+            }
             steps {
                 dependencyCheck additionalArguments: '--format HTML --format XML --suppression suppression.xml', odcInstallation: 'Default' } 
         }
